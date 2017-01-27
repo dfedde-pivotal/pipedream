@@ -1,0 +1,252 @@
+var _moarwick$elm_webpack_starter$Main$roundRect = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: _elm_lang$svg$Svg_Attributes$width('120'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$height('120'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 120 120'),
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$svg$Svg$rect,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$x('10'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$y('10'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('100'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('100'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$rx('15'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$ry('15'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
+var _moarwick$elm_webpack_starter$Main$getsRenderer = F2(
+	function (jobName, get) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									A2(_moarwick$elm_webpack_starter$Types$Join, jobName, get)),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('join '),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _moarwick$elm_webpack_starter$Main$jobRenderer = function (job) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_moarwick$elm_webpack_starter$Types$Select(job.name)),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(_elm_lang$core$Basics_ops['++'], 'select ', job.name)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						_moarwick$elm_webpack_starter$Main$getsRenderer(job.name),
+						job.gets)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _moarwick$elm_webpack_starter$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(_elm_lang$core$List$map, _moarwick$elm_webpack_starter$Main$jobRenderer, model.jobs),
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_moarwick$elm_webpack_starter$Types$Submit),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('boom'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _moarwick$elm_webpack_starter$Main$roundRect,
+					_1: {ctor: '[]'}
+				}
+			}));
+};
+var _moarwick$elm_webpack_starter$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'Submit':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _moarwick$elm_webpack_starter$Ports$toYAML(model.jobs)
+				};
+			case 'Join':
+				var _p3 = _p0._1;
+				var _p1 = model.focused;
+				if (_p1.ctor === 'Nothing') {
+					return _elm_lang$core$Native_Utils.crashCase(
+						'Main',
+						{
+							start: {line: 68, column: 13},
+							end: {line: 94, column: 67}
+						},
+						_p1)('I got nothing for focused');
+				} else {
+					var updateGets = function (gets) {
+						return A2(
+							_elm_lang$core$List$map,
+							function (aGet) {
+								return _elm_lang$core$Native_Utils.eq(aGet.name, _p3.name) ? _elm_lang$core$Native_Utils.update(
+									aGet,
+									{
+										passed: {ctor: '::', _0: _p1._0, _1: _p3.passed}
+									}) : aGet;
+							},
+							gets);
+					};
+					var updateJob = A2(
+						_elm_lang$core$List$map,
+						function (job) {
+							return _elm_lang$core$Native_Utils.eq(job.name, _p0._0) ? _elm_lang$core$Native_Utils.update(
+								job,
+								{
+									gets: updateGets(job.gets)
+								}) : job;
+						},
+						model.jobs);
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{jobs: updateJob}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							focused: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _moarwick$elm_webpack_starter$Main$init = {
+	ctor: '_Tuple2',
+	_0: {
+		focused: _elm_lang$core$Maybe$Nothing,
+		jobs: {
+			ctor: '::',
+			_0: {
+				name: 'job1',
+				gets: {
+					ctor: '::',
+					_0: {
+						name: 'jobGets1',
+						passed: {ctor: '[]'}
+					},
+					_1: {ctor: '[]'}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					name: 'job2',
+					gets: {
+						ctor: '::',
+						_0: {
+							name: 'jobGets1',
+							passed: {ctor: '[]'}
+						},
+						_1: {ctor: '[]'}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _moarwick$elm_webpack_starter$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _moarwick$elm_webpack_starter$Main$main = _elm_lang$html$Html$program(
+	{init: _moarwick$elm_webpack_starter$Main$init, update: _moarwick$elm_webpack_starter$Main$update, subscriptions: _moarwick$elm_webpack_starter$Main$subscriptions, view: _moarwick$elm_webpack_starter$Main$view})();

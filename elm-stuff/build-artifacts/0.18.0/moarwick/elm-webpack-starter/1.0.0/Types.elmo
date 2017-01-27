@@ -1,0 +1,21 @@
+var _moarwick$elm_webpack_starter$Types$Get = F2(
+	function (a, b) {
+		return {name: a, passed: b};
+	});
+var _moarwick$elm_webpack_starter$Types$Job = F2(
+	function (a, b) {
+		return {name: a, gets: b};
+	});
+var _moarwick$elm_webpack_starter$Types$Model = F2(
+	function (a, b) {
+		return {jobs: a, focused: b};
+	});
+var _moarwick$elm_webpack_starter$Types$Select = function (a) {
+	return {ctor: 'Select', _0: a};
+};
+var _moarwick$elm_webpack_starter$Types$Join = F2(
+	function (a, b) {
+		return {ctor: 'Join', _0: a, _1: b};
+	});
+var _moarwick$elm_webpack_starter$Types$Submit = {ctor: 'Submit'};
+var _moarwick$elm_webpack_starter$Types$NoOp = {ctor: 'NoOp'};

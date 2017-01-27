@@ -1,0 +1,20 @@
+var _moarwick$elm_webpack_starter$Ports$toYAML = _elm_lang$core$Native_Platform.outgoingPort(
+	'toYAML',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return {
+					name: v.name,
+					gets: _elm_lang$core$Native_List.toArray(v.gets).map(
+						function (v) {
+							return {
+								name: v.name,
+								passed: _elm_lang$core$Native_List.toArray(v.passed).map(
+									function (v) {
+										return v;
+									})
+							};
+						})
+				};
+			});
+	});
